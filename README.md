@@ -1,5 +1,5 @@
 # Book-Crossing-Dataset
-Generate top 10 books per each country into a separate table.
+The main task is to generate top 10 books per each country into a separate table.
 
 Using your deployed platform, please complete the steps:
 
