@@ -1,0 +1,20 @@
+CREATE TABLE books_by_country
+SELECT
+`Book-ratings`.`Book-rating`,
+`books`.`Book-title`,
+REPLACE(`users`.`Location`,CONCAT(SUBSTRING_INDEX(`users`.`Location`, ',', 2),', '),'') as Country
+FROM `Book-ratings`
+LEFT JOIN `books` ON `books`.`ISBN` = `Book-ratings`.`ISBN`
+LEFT JOIN `users` ON `Book-ratings`.`User-ID` = `Book-ratings`.`User-ID`;
+
+From below you pick the top 10 books for each Country this way:
+
+SELECT
+`books_by_country`.`Country`,
+`books_by_country`.`Book-title`,
+SUM(`books_by_country`.`Book-rating`) as Book_ranking
+FROM `Test`.`books_by_country`
+WHERE `books_by_country`.`Country`= 'USA'
+Group BY `books_by_country`.`Country`,`books_by_country`.`Book-title`
+ORDER BY Book_ranking DESC
+LIMIT 10;
